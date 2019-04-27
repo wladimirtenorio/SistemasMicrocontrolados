@@ -1,0 +1,131 @@
+int array[13];
+char tecla;
+
+void setup(){
+  Serial.begin(9600);
+  randomSeed(analogRead(0)); 
+  for (int i = 8; i < 13; i++) {     
+    array[i] = i;
+    pinMode(i, OUTPUT); 
+    }
+    }
+void loop() {
+  
+  Serial.println("Qual o comando? a, s, d ou f?");
+  delay(1000);
+  
+  tecla = Serial.read();
+  //Comando "A" (Ligue todos os LEDs um a um em qualquer 
+  //ordem, em seguida desligue todos os LEDS.)
+  if(tecla =='a'){
+    Serial.println("Comando A");
+     
+  //Embaralhando o array
+  for (int i = 8; i < 13; i++) {    
+    int temp = array[i];
+    //Escolhe aleatoriamente um índice
+    int novoIndice = random(8,13);
+    //Troca os valores
+    array[i] = array[novoIndice]; 
+    array[novoIndice] = temp;
+  }
+  //Array gerado aleatoriamente
+  for (int i = 8; i < 13; i++) {
+    digitalWrite(array[i], HIGH);
+    Serial.print(" ");
+    Serial.print(array[i]);
+    delay(700);
+  }
+  	delay(1000);
+    digitalWrite(8, LOW);
+  	digitalWrite(9, LOW);
+  	digitalWrite(10, LOW);
+  	digitalWrite(11, LOW);
+  	digitalWrite(12, LOW);
+  	delay(1000);
+  	
+	}
+  //Comando "S" (Ligue todos os LEDs ao mesmo tempo, em 
+  //seguida desligue os LEDs um a um em qualquer ordem)
+  if(tecla =='s'){
+    Serial.println("Comando S");
+      digitalWrite(8, HIGH);
+  	  digitalWrite(9, HIGH);
+  	  digitalWrite(10, HIGH);
+  	  digitalWrite(11, HIGH);
+  	  digitalWrite(12, HIGH);
+  	  delay(1000);
+     
+     for (int i = 8; i < 13; i++) {    
+      int temp = array[i];
+      int novoIndice = random(8,13);
+      array[i] = array[novoIndice]; 
+      array[novoIndice] = temp;
+     }
+     //Array gerado aleatoriamente
+     for (int i = 8; i < 13; i++) {
+       digitalWrite(array[i], LOW);
+       Serial.print(" ");
+       Serial.print(array[i]);
+       delay(700);
+      }
+     
+   }
+  //Comando "D" (Ligue somente os LEDs ligados a  
+  //portas com números pares)
+  if(tecla =='d'){
+    Serial.println("Comando D");
+    
+  for (int i = 8; i < 13; i++) {    
+    int temp = array[i];
+    int novoIndice = random(8,13);
+    array[i] = array[novoIndice]; 
+    array[novoIndice] = temp;
+  }
+  for (int i = 8; i < 13; i++) {
+    if (array[i] %2 == 0){
+    digitalWrite(array[i], HIGH);
+    Serial.print(" ");
+    Serial.print(array[i]);  
+    }
+  }
+  	delay(2000);
+    digitalWrite(8, LOW);
+  	digitalWrite(9, LOW);
+  	digitalWrite(10, LOW);
+  	digitalWrite(11, LOW);
+  	digitalWrite(12, LOW);
+  	delay(1000);
+    Serial.println("");
+  	
+	}
+  
+  //Comando "F" (Ligue somente os LEDs ligados a  
+  //portas com números impares)
+  if(tecla =='f'){
+    Serial.println("Comando F");
+    
+  for (int i = 8; i < 13; i++) {    
+    int temp = array[i];
+    int novoIndice = random(8,13);
+    array[i] = array[novoIndice]; 
+    array[novoIndice] = temp;
+  }
+  for (int i = 8; i < 13; i++) {
+    if (array[i] %2 == 1){
+    digitalWrite(array[i], HIGH);
+    Serial.print(" ");
+    Serial.print(array[i]);
+    }
+  }
+  	delay(2000);
+    digitalWrite(8, LOW);
+  	digitalWrite(9, LOW);
+  	digitalWrite(10, LOW);
+  	digitalWrite(11, LOW);
+  	digitalWrite(12, LOW);
+  	delay(1000);
+    Serial.println("");
+  	
+	}
+}

@@ -1,0 +1,121 @@
+int Led1 = 12;
+int Led2 = 11;
+int Led3 = 10;
+int Led4 = 9;
+int Led5 = 8;
+int Bot = 2;
+int x = 0;
+
+void setup()
+{
+  pinMode(Led1, OUTPUT);
+  pinMode(Led2, OUTPUT);
+  pinMode(Led3, OUTPUT);
+  pinMode(Led4, OUTPUT);
+  pinMode(Led5, OUTPUT);
+  pinMode(Bot, INPUT);
+  attachInterrupt(digitalPinToInterrupt(Bot), somarx, RISING);
+}
+
+void loop(){
+     
+    executar();
+  	delay(100);
+    
+  }
+
+
+void somarx(){
+x=x+1;
+}
+void executar(){
+    if (x == 1){
+        ligarLed5();
+        ligarLed4();
+        ligarLed3();
+        ligarLed2();
+        ligarLed1();
+      	
+     
+    }
+    if (x == 2){
+        desligarLed1();
+        desligarLed2();
+        desligarLed3();
+        desligarLed4();
+        desligarLed5();
+      	x = 0;
+    }
+}
+
+void ligarLed5(){
+  digitalWrite(Led5, HIGH);
+  delay(300);
+}
+void ligarLed4(){
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led4, HIGH);
+  delay(300);
+}
+void ligarLed3(){
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led3, HIGH);    
+  delay(300);
+}
+void ligarLed2(){
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led3, HIGH);    
+  digitalWrite(Led2, HIGH);
+  delay(300);
+}
+void ligarLed1(){
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led3, HIGH);    
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led1, HIGH);
+  delay(300);
+}
+void desligarLed1(){
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led3, HIGH);    
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led5, HIGH);
+  delay(300);
+ 
+}
+void desligarLed2(){
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led2, LOW);
+  digitalWrite(Led3, HIGH);    
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led5, HIGH);
+  delay(300);
+}
+void desligarLed3(){
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led2, LOW);
+  digitalWrite(Led3, LOW);    
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led5, HIGH);
+  delay(300);
+}
+void desligarLed4(){
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led2, LOW);
+  digitalWrite(Led3, LOW);    
+  digitalWrite(Led4, LOW);
+  digitalWrite(Led5, HIGH);
+  delay(300);
+}
+void desligarLed5(){
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led2, LOW);
+  digitalWrite(Led3, LOW);    
+  digitalWrite(Led4, LOW);
+  digitalWrite(Led5, LOW);
+  delay(300);
+}

@@ -1,0 +1,54 @@
+int Led1 = 11;
+int Led2 = 10;
+int Led3 = 9;
+int trig = 7;
+int echo = 6;
+float pulse;
+float dist_cm;
+
+void setup()
+{
+  pinMode(Led1, OUTPUT);
+  pinMode(Led2, OUTPUT);
+  pinMode(Led3, OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  digitalWrite(trig, LOW);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+trigPulse();
+pulse = pulseIn(echo, HIGH);  
+dist_cm=pulse/58.82;  
+    
+  if(dist_cm <30.00){
+  digitalWrite(Led1, HIGH);
+  
+  digitalWrite(Led2, LOW);
+  digitalWrite(Led3, LOW);  
+  }
+  if(dist_cm >= 30.00 &&  dist_cm <50.00){
+  digitalWrite(Led2, HIGH);
+  
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led3, LOW);  
+  }
+  if(dist_cm >= 50.00){
+  digitalWrite(Led3, HIGH);
+  
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led2, LOW);  
+  }
+ Serial.print("Valor do sensor de distância: ");
+ Serial.println(dist_cm); 
+  
+}
+
+void trigPulse(){
+digitalWrite(trig,HIGH);
+delayMicroseconds(10);
+digitalWrite(trig,LOW);  
+}
+
